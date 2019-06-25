@@ -42,7 +42,7 @@ void hash_table_insert(HashTable *ht, int key, int value)
   LinkedPair *current_pair = ht->storage[index];
   LinkedPair *last_pair;
 
-  while (current_pair != NULL && current_pair->key != key) {
+  while (current_pair != NULL ) {
     last_pair = current_pair;
     current_pair = last_pair->next;
   }
@@ -67,7 +67,7 @@ void hash_table_remove(HashTable *ht, int key)
     previous_pair = current_pair;
     current_pair = current_pair->next;
   }
-
+  
   if (current_pair == NULL) {
     fprintf(stderr, "Unable to remove entry with key: %d\n", key);
   } else {
@@ -76,7 +76,9 @@ void hash_table_remove(HashTable *ht, int key)
     } else {
       previous_pair->next = current_pair->next;
     }
-
+    // if(current_pair->next != NULL){
+    //   printf("weight:%d  index:%d\n",current_pair->next->key, current_pair->next->value);
+    // }
     destroy_pair(current_pair);
   }
 }
