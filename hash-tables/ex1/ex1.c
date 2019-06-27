@@ -36,6 +36,8 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
       }
     }
   }
+  // free the memory
+  destroy_hash_table(ht);
   return NULL;
 }
 
@@ -67,7 +69,7 @@ int main(void)
   // TEST 3
   int weights_3[] = {6, 4, 10, 15, 16};
   Answer *answer_3 = get_indices_of_item_weights(weights_3, 5, 21);
-  print_answer(answer_3); // {3, 1}
+  print_answer(answer_3); // {3, 0}
 
   // TEST 4
   int weights_4[] = {12, 6, 7, 14, 19, 3, 0, 25, 40};
