@@ -10,7 +10,22 @@ char **reconstruct_trip(Ticket **tickets, int length)
   char **route = malloc(length * sizeof(char *));
 
   /* YOUR CODE HERE */
-
+  //  put all tickets into linked list and keep track of first ticket
+  for(int i = 0; i<length; i++){
+    if(strcmp(tickets[i]->source ,"NONE")== 0){
+      route[0] = tickets[i]->destination;
+    }else{
+      hash_table_insert(ht, tickets[i]->source, tickets[i]->destination);
+    }
+  }
+  // make a list of tickets
+  for(int i = 1; i <length; i++){
+    // get next place
+    route[i] = hash_table_retrieve(ht,route[i-1]);
+  }
+  // free ht 
+  destroy_hash_table(ht);
+  
   return route;
 }
 
